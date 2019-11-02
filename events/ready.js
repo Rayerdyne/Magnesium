@@ -1,5 +1,5 @@
 module.exports = (bot) => {
-      console.log("BolGrol c\'est parti !");
+      console.log("The bot is started !");
 
       bot.commands.get("s_reload").run(bot);
 };

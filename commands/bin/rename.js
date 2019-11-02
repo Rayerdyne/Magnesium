@@ -10,5 +10,5 @@ exports.run = (bot, msg, args) =>{
 
 exports.help = {
   name: "rename",
-  description: "Fait se renommer le bot. xD"
+  description: "Makes the bot rename itself."
 };

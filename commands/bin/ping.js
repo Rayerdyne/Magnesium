@@ -5,5 +5,5 @@ exports.run = (bot, msg, args) =>{
 
 exports.help = {
   name: "ping",
-  description: "Répond pong quand on dit ping. C'est tout."
+  description: "Answers pong. Wow."
 };

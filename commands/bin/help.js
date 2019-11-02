@@ -19,7 +19,7 @@ exports.run = (bot, msg, args) =>{
 
       if (! bot.commands.has(cmd)) {
             if (bot.aliases.has(cmd)){
-                  msg.channel.send("Alias for \"`s_register`\".");
+                  msg.channel.send(`Alias for ${bot.aliases.get(cmd)}`);
                 }
             msg.channel.send(`Command ${cmd} doesn't exists !`);
             return;

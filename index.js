@@ -1,7 +1,6 @@
-//Importation des constantes
+//Constants importations
 const { TOKEN, PREFIX, CMDSEPARATOR } = require('./config');
 
-//Pour Discord
 const {Client, Collection} = require('discord.js');
 const bot = new Client({ disableEveryOne: true });
 const fs = require("fs");
@@ -12,8 +11,8 @@ bot.DELAY = 5000;
 
 bot.commands = new Collection();
 
-//fonction qui lit les commandes d'un fichier (en arg) et les ajoutes
-function lireCommandes(bot, dossier)
+//reads commands and adds them
+function readCommands(bot, dossier)
 {
 
   fs.readdir(dossier, (err, files) =>{
@@ -30,27 +29,33 @@ function lireCommandes(bot, dossier)
 
 }
 
-//lecture des différends sous-dossiers
-lireCommandes(bot, "./commands/bin/");
-lireCommandes(bot, "./commands/counter/");
-lireCommandes(bot, "./commands/store/");
+//reading sub-folders
+readCommands(bot, "./commands/bin/");
+readCommands(bot, "./commands/store/");
+readCommands(bot, "./commands/player/");
 
-//pour la commande qui compte le nb de fois qu'on dit ...
-bot.counters = new Collection();
 
-//pour la banque d'url
+//url bank :
 bot.urls = new Collection();
 
-//Importation des urls enregistrées, lorsque l'évènement ready se produit : dans ready.js
-
-//doubles noms pour les commandes
+//Aliases system
 bot.aliases = new Collection();
 bot.aliases.set("s_reg", "s_register");
+bot.aliases.set("s_rm", "s_remove");
+
+bot.player = {
+    queue: [],
+    current: {},
+    isLooping: false,
+    isPlaying: false,
+    toValidate:[]
+}
 
 
 bot.on('ready', () => require("./events/ready.js")(bot));
 bot.on('message', msg => require("./events/message.js")(bot, msg));
-//                  +> non-bot arguments
+bot.on('messageReactionAdd', (messageReaction, user) => require("./events/messagereaction.js")
+                (messageReaction, user));
 
 
 bot.login(TOKEN);
