@@ -3,7 +3,7 @@ const fs = require('fs');
 exports.run = (bot, msg, args) =>{
       let toWrite = {};
 
-      bot.urls.forEach((value, key, map) =>{
+      bot.store.forEach((value, key, map) =>{
           toWrite[key] = value;
       });
 

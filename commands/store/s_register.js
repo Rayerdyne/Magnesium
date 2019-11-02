@@ -6,12 +6,12 @@ exports.run = (bot, msg, args) =>{
           return;
         }
 
-      if (bot.urls.has(args[0])){
+      if (bot.store.has(args[0])){
           msg.channel.send(`\`${args[0]}\` already exists.`);
           return;
         }
 
-      bot.urls.set(args[0], args[1]);
+      bot.store.set(args[0], args[1]);
 
       msg.channel.send(`\`${args[0]}\` registered!`);
 };

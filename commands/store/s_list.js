@@ -1,13 +1,13 @@
 exports.run = (bot, msg, args) =>{
 
-    let enthalt = "**All keys registered :**\n`";
+    let content = "**All keys registered :**\n`";
 
-    bot.urls.forEach((value, key, map) => {
-          enthalt = enthalt + '\n' + key + ',';
+    bot.store.forEach((value, key, map) => {
+          content = content + key + ','+ '\n';
         });
-    enthalt = enthalt + '`'
+    content = content.substring(0, content.length - 1) + '`'
 
-    msg.channel.send(enthalt);
+    msg.channel.send(content);
 };
 
 

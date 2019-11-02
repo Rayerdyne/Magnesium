@@ -8,12 +8,12 @@ exports.run = (bot, msg, args) =>{
       var i;
       for (i = 0; i < args.length; i++)
           {
-            if (! bot.urls.has(args[i])){
+            if (! bot.store.has(args[i])){
                 msg.channel.send(`\`${args[i]}\` does not exists !`);
                 return;
                 }
 
-            msg.channel.send('__' + bot.urls.get(args[i]) + '__');
+            msg.channel.send('__' + bot.store.get(args[i]) + '__');
 
           }
 

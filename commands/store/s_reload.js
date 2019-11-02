@@ -1,9 +1,9 @@
 exports.run = (bot, msg, args) =>{
-      let variablee = require('./../../urls.json');
-      bot.urls.deleteAll();
+      let variablee = require('./../store/urls.json');
+      bot.store.deleteAll();
 
       for (var i in variablee){
-            bot.urls.set(i, variablee[i]);
+            bot.store.set(i, variablee[i]);
       }
 
 

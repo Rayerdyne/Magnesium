@@ -21,7 +21,6 @@ function readCommands(bot, dossier)
           if (!file.endsWith(".js"))   return undefined;
           const props = require(`${dossier}${file}`);
           const cmdName = file.split(".")[0];
-          console.log(`Commande : ${cmdName}`);
 
           bot.commands.set(cmdName, props);
       });
@@ -55,8 +54,8 @@ bot.player = {
 
 bot.on('ready', () => require("./events/ready.js")(bot));
 bot.on('message', msg => require("./events/message.js")(bot, msg));
-bot.on('messageReactionAdd', (messageReaction, user) => require("./events/messagereaction.js")
-                (messageReaction, user));
+bot.on('messageReactionAdd', (messageReaction, user) => require("./events/messageReaction.js")
+                (messageReaction, user, bot));
 
 
 bot.login(TOKEN);

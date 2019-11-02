@@ -1,9 +1,9 @@
 const ytdl = require("ytdl-core");
 
 /*Code copied from CodeLyon. I just added some stuff his code.*/
-function play (connection, msg)
+function play (connection, msg, bot)
 {
-    bot.player.dispatcher = connection.playStream(ytdl(bot.player.queue[0], {filter: "audioonly"}));
+    bot.player.dispatcher = connection.playStream(ytdl(bot.player.queue[0].video_url, {filter: "audioonly"}));
 
     bot.player.current = bot.player.queue.shift();
     bot.player.isPlaying = true;
@@ -24,7 +24,7 @@ function play (connection, msg)
     return;
 }
 
-exports.run = (bot, msg, args, root) =>{
+exports.run = async (bot, msg, args, root) =>{
 
     if (!args[0]){
         msg.channel.send("There is no arguments !");
@@ -37,19 +37,37 @@ exports.run = (bot, msg, args, root) =>{
     }
 
     if (bot.player.djrole){
-        if(!root && !msg.member.roles.find(bot.player.djrole)){
+        if(!root && !msg.member.roles.find(role => role.name ===  bot.player.djrole)){
+            bot.player.toValidate.push(msg);
             msg.channel.send("You are not allowed to ! Wait until a DJ likes your message.");
             return;
         }
     }
 
+    var song;
     if (bot.store.has(args[0]))
-        args[0] = bot.store.get(args[0]);
+        song = bot.store.get(args[0]);
+    else
+        song = args[0];
 
-    bot.player.queue.push(args[0]);
+    if (!ytdl.validateURL(song)){
+        msg.channel.send(`The url __${song}__ is not valid !`);
+        return;
+    }
+
+    console.log(song);
+    info = await ytdl.getBasicInfo(song);
+    if (msg.member.nickname)
+        info.requester = msg.member.nickname;
+    else
+        info.requester = msg.author.username;
+
+    bot.player.queue.push(info);
+
+    msg.channel.send(`__${bot.player.queue[bot.player.queue.length-1].title}__ added to queue.`);
 
     if (!msg.guild.voiceConnection) msg.member.voiceChannel.join().then(connection => {
-        play (connection, msg);
+        play (connection, msg, bot);
     });
 
     return;

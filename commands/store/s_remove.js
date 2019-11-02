@@ -2,19 +2,19 @@ exports.run = (bot, msg, args) =>{
 
     //Vérifications
         if (! args[0]){
-              msg.channel.send("Pas d'arguments !").then(message => message.delete(bot.DELAY));
+              msg.channel.send("There is no arguments !");
               return;
         }
 
         for (i = 0; i < args.length; i++)
             {
-              if (! bot.urls.has(args[i])){
-                  msg.channel.send(`${args[i]} n'existe pas !`);
+              if (! bot.store.has(args[i])){
+                  msg.channel.send(`${args[i]} does not exists !`);
                   return;
                   }
 
-              bot.urls.delete(args[i]);
-              msg.channel.send(`${args[i]} supprimé !`).then(m => m.delete(bot.DELAY));
+              bot.store.delete(args[i]);
+              msg.channel.send(`${args[i]} deleted !`);
 
             }
 

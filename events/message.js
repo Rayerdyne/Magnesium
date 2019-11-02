@@ -5,7 +5,7 @@ module.exports = (bot, msg) =>{
       {  msg.channel.send(bot.PREFIX);}
 
   if (msg.content.indexOf(bot.PREFIX) !== 0)   return;
-  if (msg.author.bot)                          return;
+  // if (msg.author.bot)                          return;
 
   const lines = msg.content.slice(bot.PREFIX.length).split(bot.CMDSEPARATOR);
   var i;
@@ -21,16 +21,16 @@ module.exports = (bot, msg) =>{
           }
 
 
-      commande = bot.commands.get(cmd);
-      if (!commande){
+      command = bot.commands.get(cmd);
+      if (!command){
             //aliases
             if (bot.aliases.has(cmd)){
                   cmd = bot.aliases.get(cmd);
-                  commande = bot.commands.get(cmd);
+                  command = bot.commands.get(cmd);
                 }
-            if (! commande)    return undefined;
+            if (! command)    return undefined;
           }
 
-      commande.run(bot, msg, args);
+      command.run(bot, msg, args);
       }
 };

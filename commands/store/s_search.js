@@ -11,7 +11,7 @@ exports.run = (bot, msg, args) =>{
                     .setTitle("Matches :");
 
     var c = 0;
-    bot.urls.forEach((value, key, map) => {
+    bot.store.forEach((value, key, map) => {
         if (key.indexOf(args[0]) !== -1){
             embed.addField(key, value, true);
             c++;
