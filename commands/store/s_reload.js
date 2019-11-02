@@ -3,19 +3,16 @@ exports.run = (bot, msg, args) =>{
       bot.urls.deleteAll();
 
       for (var i in variablee){
-            // if (variablee.hasOwnProperty(i)){
-                  bot.urls.set(i, variablee[i]);
-            // }
+            bot.urls.set(i, variablee[i]);
       }
 
-      console.log ("bot.urls : " + bot.urls);
-      console.log (variablee);
 
       if (! msg)    return;
-      msg.channel.send("Rechargé !").then(mess => mess.delete(bot.DELAY));
+      msg.channel.send("Reloaded !");
 };
 
 exports.help = {
-  name: "reload",
-  description: "Lis le fichier json et mets à jour."
+  name: "s_reload",
+  description: "Reloads the json file and updates the url bank.\n \
+  :warning: Unsaved changes will be lost."
 };

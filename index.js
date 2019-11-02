@@ -36,7 +36,7 @@ readCommands(bot, "./commands/player/");
 
 
 //url bank :
-bot.urls = new Collection();
+bot.store = new Collection();
 
 //Aliases system
 bot.aliases = new Collection();
@@ -48,7 +48,8 @@ bot.player = {
     current: {},
     isLooping: false,
     isPlaying: false,
-    toValidate:[]
+    toValidate:[],
+    dispatcher:{}
 }
 
 

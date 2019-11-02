@@ -3,12 +3,12 @@ const {RichEmbed} = require('discord.js')
 exports.run = (bot, msg, args) =>{
     //Vérifications...
       if (! args[0]){
-            msg.channel.send("Pas d'arguments !").then(message => message.delete(bot.DELAY));
+            msg.channel.send("Not enough arguments !");
             return;
         }
 
     const embed = new RichEmbed()
-                    .setTitle("Toutes les entrées enregistrées :");
+                    .setTitle("Matches :");
 
     var c = 0;
     bot.urls.forEach((value, key, map) => {
@@ -19,7 +19,7 @@ exports.run = (bot, msg, args) =>{
       });
 
     if (c === 0){
-        msg.channel.send("Pas re résutlats. Désolé.");
+        msg.channel.send("No result found.");
       }
     else{
         msg.channel.send(embed);
@@ -28,6 +28,6 @@ exports.run = (bot, msg, args) =>{
 };
 
 exports.help = {
-  name: "search",
-  description: "Recherche un mot-clé dans toutes les clés de la banque d'urls"
+  name: "s_search",
+  description: "Search a key-word in the url bank."
 };

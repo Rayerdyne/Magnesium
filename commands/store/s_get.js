@@ -1,7 +1,7 @@
 exports.run = (bot, msg, args) =>{
   //Vérifications
       if (! args[0]){
-            msg.channel.send("Pas d'arguments !").then(message => message.delete(bot.DELAY));
+            msg.channel.send("Not enough arguments !");
             return;
       }
 
@@ -9,17 +9,18 @@ exports.run = (bot, msg, args) =>{
       for (i = 0; i < args.length; i++)
           {
             if (! bot.urls.has(args[i])){
-                msg.channel.send(`${args[i]} n'existe pas !`);
+                msg.channel.send(`\`${args[i]}\` does not exists !`);
                 return;
                 }
 
-            msg.channel.send(bot.urls.get(args[i]));
+            msg.channel.send('__' + bot.urls.get(args[i]) + '__');
 
           }
 
 };
 
 exports.help = {
-  name: "get",
-  description: "Retrouve une url à partir de son nom"
+  name: "s_get",
+  description: "Sends what's stored under a providen key :\n \
+  `get key`  will send what has been stored in `key`."
 };

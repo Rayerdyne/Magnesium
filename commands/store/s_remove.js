@@ -21,6 +21,6 @@ exports.run = (bot, msg, args) =>{
 };
 
 exports.help = {
-  name: "remove",
-  description: "Removes an element"
+  name: "s_remove",
+  description: "Removes an element.\nAlias : `s_rm`"
 };

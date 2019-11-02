@@ -7,17 +7,16 @@ exports.run = (bot, msg, args) =>{
           toWrite[key] = value;
       });
 
-      let donnees = JSON.stringify(toWrite);
-      fs.writeFileSync('./commands/store/urls.json', donnees);
+      let data = JSON.stringify(toWrite);
+      fs.writeFileSync('./commands/store/urls.json', data);
 
-      console.log (toWrite);
       console.log ("Registered");
 
-      msg.channel.send("Enregistré !").then(mmm => mmm.delete(bot.DELAY));
+      msg.channel.send("Saved !");
 
 };
 
 exports.help = {
-  name: "save",
-  description: "Effectue l'écriture dans le fichier json"
+  name: "s_save",
+  description: "Write the complete url bank in the json file."
 };

@@ -1,8 +1,7 @@
 exports.run = (bot, msg, args) =>{
 
-    let enthalt = "**Toutes les entrées enregistrées :**\n`";
+    let enthalt = "**All keys registered :**\n`";
 
-    var i = 0;
     bot.urls.forEach((value, key, map) => {
           enthalt = enthalt + '\n' + key + ',';
         });
@@ -13,6 +12,6 @@ exports.run = (bot, msg, args) =>{
 
 
 exports.help = {
-  name: "list",
-  description: "Liste tous les noms enregistrés"
+  name: "s_list",
+  description: "Lists all keys registered."
 };
