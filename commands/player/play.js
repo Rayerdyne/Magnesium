@@ -71,6 +71,15 @@ exports.run = async (bot, msg, args, root) =>{
         const sep = args.splice(i+1, 1);
         if (sep[0] !== '&')
             break;
+        else if (sep === '-s'){
+            forReg[0] = args.splice(i+1, 1);
+            forReg[1] = args[i];
+            if (args.slice(i+1, 1)[0] === "in"){
+                forReg[2] = "in";
+                forReg[3] = args.splice(i+1, 2)[1];
+            }
+            bot.commands.get("register").run(bot, msg, forReg);
+        }
     }
 
     if (!msg.guild.voiceConnection) msg.member.voiceChannel.join().then(connection => {

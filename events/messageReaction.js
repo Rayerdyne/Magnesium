@@ -29,6 +29,16 @@ module.exports = (messageReaction, user, bot) => {
           if (! command)    return undefined;
         }
 
+    var i;
+    for (i = 0; i < bot.player.toValidate.length; i++){
+      if (bot.player.toValidate[i].content === messageReaction.message.content){
+        bot.player.toValidate.splice(i, 1);
+        break;
+      }
+    }
+    if (i === bot.player.toValidate.length) return;
+    //in this case, the reacted message is not from a non DJ people
+
     command.run(bot, messageReaction.message, args, true);
     return;
 }
