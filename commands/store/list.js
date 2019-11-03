@@ -46,8 +46,8 @@ exports.run = (bot, msg, args) =>{
 exports.help = {
   name: "list",
   description: "Lists the registered elements : \n \
-`list` will list the current directory\n \
-`list dirs` will lists all directories\n \
-`list myDir` will list the content of directory **myDir**\n \
-`list everything` will list all directories and thier content."
+`list` lists the current directory\n \
+`list dirs` lists all directories\n \
+`list myDir` lists the content of directory **myDir**\n \
+`list everything` lists all directories and thier content."
 };

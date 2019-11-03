@@ -47,8 +47,8 @@ exports.help = {
   name: "register",
   description: "Registers an url. Use :\n \
 `register key url` registers key in the current directory\n \
-`register key url in myDir` will register key in the **myDir** directory\n \
-`register dir myDir` will create the directory **myDir**\n \
-:warning: It is not automatically saved ! You need to call `save`\n \
+`register key url in myDir` registers key in the **myDir** directory\n \
+`register dir myDir` creates the directory **myDir**\n \
+:warning: Changes are not automatically saved ! You need to call `save`\n \
 Alias : `reg`"
 };

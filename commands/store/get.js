@@ -36,6 +36,6 @@ exports.run = (bot, msg, args, fromPlay) =>{
 exports.help = {
   name: "get",
   description: "Sends what's stored under a providen key :\n \
-`get key`  will send what has been stored in `key` in the current directory\n \
-`get key in myDir` will send what has been stored in `key` in **myDir**."
+`get key` sends what has been stored in `key` in the current directory\n \
+`get key in myDir` sends what has been stored in `key` in **myDir**."
 };

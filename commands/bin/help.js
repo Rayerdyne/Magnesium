@@ -1,13 +1,12 @@
 exports.run = (bot, msg, args) =>{
 
       if (! args[0]){
-            let enthalt = "Commands :\n"
+            let ans = "Commands :\n"
             bot.commands.forEach((value, key, map) =>{
-                  enthalt = enthalt + "> `" + key + "`\n";
+                  ans = ans + "> `" + key + "`\n";
                 });
-            enthalt = enthalt + "You can skip underscores : for example, \"`{prefix}s tell`\" works.\n"
-            enthalt = enthalt + "Type `{prefix}help {command}` to get the command's help."
-            msg.channel.send(enthalt);
+            ans = ans + "Type `help command` to get command's help."
+            msg.channel.send(ans);
             return;
           }
 
@@ -20,6 +19,7 @@ exports.run = (bot, msg, args) =>{
       if (! bot.commands.has(cmd)) {
             if (bot.aliases.has(cmd)){
                   msg.channel.send(`Alias for ${bot.aliases.get(cmd)}`);
+                  return;
                 }
             msg.channel.send(`Command ${cmd} doesn't exists !`);
             return;

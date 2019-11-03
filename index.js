@@ -41,8 +41,8 @@ bot.curDir = "global";
 
 //Aliases system
 bot.aliases = new Collection();
-bot.aliases.set("reg", "s_register");
-bot.aliases.set("rm", "s_remove");
+bot.aliases.set("reg", "register");
+bot.aliases.set("rm", "remove");
 
 bot.player = {
     queue: [],

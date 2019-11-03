@@ -21,6 +21,6 @@ exports.help = {
   name: "cd",
   description: "Changes the current directory.\n \
 The bot automatically saves and searches new elements in this one, unless it is specified. \n \
-`cd myDir` will set it to **myDir**\n \
-`cd ..` will set it to **global**."
+`cd myDir` sets it to **myDir**\n \
+`cd ..` sets it to **global**."
 };

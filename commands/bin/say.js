@@ -6,5 +6,5 @@ exports.run = (bot, msg, args) =>{
 
 exports.help = {
   name: "say",
-  description: "Repeats what follows the command"
+  description: "Repeats what follows the command."
 };

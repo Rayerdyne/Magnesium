@@ -31,6 +31,6 @@ exports.run = (bot, msg, args) =>{
 exports.help = {
   name: "ping",
   description: "Sets the DJ role.\n \
-  `setdjrole DJrole` or \n \
-  `setdjrole none` to enable everyone."
+`setdjrole DJrole` or \n \
+`setdjrole none` to enable everyone."
 };
