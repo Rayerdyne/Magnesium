@@ -1,6 +1,6 @@
 exports.run = (bot, msg, args) =>{
     if (! args[0]){
-        msg.channel.send("Pas d'argument !").then(message => message.delete(bot.DELAY));
+        msg.channel.send("No arguments provided !");
         return;
         }
 

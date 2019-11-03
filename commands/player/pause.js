@@ -26,5 +26,5 @@ exports.run = (bot, msg, args, root) =>{
 
 exports.help = {
   name: "pause",
-  description: "Pauses currently player song."
+  description: "Pauses currently played song."
 };

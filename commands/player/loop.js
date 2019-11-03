@@ -34,7 +34,5 @@ exports.run = (bot, msg, args, root) =>{
 
 exports.help = {
   name: "ping",
-  description: "Defines if the bot loops the current queue :\n \
-  `loop on`\n \
-  `loop off`"
+  description: "Defines if the bot loops the current queue : precise `on` or `off`."
 };

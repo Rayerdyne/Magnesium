@@ -32,5 +32,5 @@ exports.run = (bot, msg, args) =>{
 
 exports.help = {
   name: "help",
-  description: "Sends the help related to a specified command, the command list if no argument is provided"
+  description: "Sends the help related to a specified command, the command list if no argument is provided."
 };

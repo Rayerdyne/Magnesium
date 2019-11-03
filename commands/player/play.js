@@ -49,9 +49,8 @@ exports.run = async (bot, msg, args, root) =>{
     var i;
     for (i = 0; i < args.length; i++){
 
-        if (bot.store.has(args[i]))
-            song = bot.store.get(args[i]);
-        else
+        song = bot.commands.get("get").run(bot, msg, args.slice(i), true);
+        if (!song)
             song = args[i];
 
         if (!ytdl.validateURL(song)){
@@ -85,5 +84,7 @@ exports.help = {
   name: "play",
   description: "Plays the given song, through its url or key if stored :\n \
   `play url`\n \
-  `play key` , where `key` is registered as a valid url."
+  `play key` , where `key` is registered as a valid url.\n \
+  `key` is searched in the current directory (see `cd` command) if not specified :\n \
+  `play key in myDir`."
 };

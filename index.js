@@ -36,11 +36,13 @@ readCommands(bot, "./commands/player/");
 
 //url bank :
 bot.store = new Collection();
+bot.store.set("global", new Collection());
+bot.curDir = "global";
 
 //Aliases system
 bot.aliases = new Collection();
-bot.aliases.set("s_reg", "s_register");
-bot.aliases.set("s_rm", "s_remove");
+bot.aliases.set("reg", "s_register");
+bot.aliases.set("rm", "s_remove");
 
 bot.player = {
     queue: [],

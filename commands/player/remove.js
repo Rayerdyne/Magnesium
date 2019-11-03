@@ -38,5 +38,6 @@ msg.channel.send(`${removed[0].title} removed from queue !`);
 
 exports.help = {
   name: "remove",
-  description: "Removes the {arg} element from the queue."
+  description: "Removes an element from the queue :\n \
+  Example :  `remove 2`"
 };

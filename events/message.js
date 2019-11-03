@@ -1,6 +1,5 @@
 module.exports = (bot, msg) =>{
-
-      //prefix command for admins
+//prefix command for admins
   if (msg.member.hasPermission("ADMINISTRATOR") && msg.content.startsWith("prefix"))
       {  msg.channel.send(bot.PREFIX);}
 
@@ -14,12 +13,6 @@ module.exports = (bot, msg) =>{
 
       const args = lines[i].trim().split(/ +/g);//removes blanks and split
       let cmd = args.shift().toLowerCase();
-
-        //"zone" commands
-      if (cmd.length === 1){
-            cmd = cmd + '_' + args.shift().toLowerCase();
-          }
-
 
       command = bot.commands.get(cmd);
       if (!command){
