@@ -19,6 +19,7 @@ exports.run = (bot, msg, args, root) =>{
     if(bot.player.isPlaying){
         bot.player.dispatcher.pause();
         bot.player.isPlaying = false;
+        msg.channel.send("Paused !");
     }
 
 };

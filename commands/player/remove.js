@@ -22,7 +22,7 @@ if (!reg.test(args[0])){
   return;
 }
 const index = parseInt(args[0]) - 1;
-if (index <= 0){
+if (index < 0){
   msg.channel.send("Argument is negative !");
   return;
 } else if (index > bot.player.queue.length){
@@ -32,6 +32,7 @@ if (index <= 0){
 
 const removed = bot.player.queue.splice(index, 1);
 msg.channel.send(`${removed[0].title} removed from queue !`);
+// console.log(bot.player.queue.slice(index, 1)[0].title);
 
 };
 

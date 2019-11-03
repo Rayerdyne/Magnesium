@@ -7,8 +7,11 @@ exports.run = (bot, msg, args, root) =>{
         }
     }
 
-    if (msg.guild.voiceConnection){
-        bot.player.queue.splice(0, bot.player.queue.lenght);
+    if (msg.guild.me.voiceChannel){
+        for (i = bot.player.queue.length; i >= 0; i--){
+            bot.player.queue.splice(i, 1);
+            }
+        bot.player.current.title = undefined;
         bot.player.dispatcher.end();
         msg.channel.send("Stopped.");
     }

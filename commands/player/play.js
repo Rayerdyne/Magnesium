@@ -9,12 +9,13 @@ function play (connection, msg, bot)
     bot.player.isPlaying = true;
 
     bot.player.dispatcher.on("end", () => {
-        if (bot.player.isLooping)
+        if (bot.player.isLooping){
             bot.player.queue.push(bot.player.current);
+        }
 
         if (bot.player.queue[0]){
             bot.player.isPlaying = true;
-            play(connection, msg);
+            play(connection, msg, bot);
         }
         else{
             connection.disconnect();
@@ -45,26 +46,33 @@ exports.run = async (bot, msg, args, root) =>{
     }
 
     var song;
-    if (bot.store.has(args[0]))
-        song = bot.store.get(args[0]);
-    else
-        song = args[0];
+    var i;
+    for (i = 0; i < args.length; i++){
 
-    if (!ytdl.validateURL(song)){
-        msg.channel.send(`The url __${song}__ is not valid !`);
-        return;
+        if (bot.store.has(args[i]))
+            song = bot.store.get(args[i]);
+        else
+            song = args[i];
+
+        if (!ytdl.validateURL(song)){
+            msg.channel.send(`The url __${song}__ is not valid !`);
+            return;
+        }
+
+        info = await ytdl.getBasicInfo(song);
+        if (msg.member.nickname)
+            info.requester = msg.member.nickname;
+        else
+            info.requester = msg.author.username;
+
+        bot.player.queue.push(info);
+
+        msg.channel.send(`__${bot.player.queue[bot.player.queue.length-1].title}__ added to queue.`);
+
+        const sep = args.splice(i+1, 1);
+        if (sep[0] !== '&')
+            break;
     }
-
-    console.log(song);
-    info = await ytdl.getBasicInfo(song);
-    if (msg.member.nickname)
-        info.requester = msg.member.nickname;
-    else
-        info.requester = msg.author.username;
-
-    bot.player.queue.push(info);
-
-    msg.channel.send(`__${bot.player.queue[bot.player.queue.length-1].title}__ added to queue.`);
 
     if (!msg.guild.voiceConnection) msg.member.voiceChannel.join().then(connection => {
         play (connection, msg, bot);

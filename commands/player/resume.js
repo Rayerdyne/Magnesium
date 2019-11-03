@@ -19,6 +19,7 @@ exports.run = (bot, msg, args, root) =>{
     if (!bot.player.isPlaying){
         bot.player.dispatcher.resume();
         bot.player.isPlaying = true;
+        msg.channel.send("Resumed !");
     }
 };
 
