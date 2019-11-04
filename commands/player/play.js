@@ -51,13 +51,14 @@ exports.run = async (bot, msg, args, root) =>{
     var i;
     for (i = 0; i < args.length; i++){
 
-        song = bot.commands.get("get").run(bot, msg, args.slice(i), true);
-        if (!song)
-            song = args[i];
+        song = args[i];
 
         if (!ytdl.validateURL(song)){
-            msg.channel.send(`The url __${song}__ is not valid !`);
-            return;
+            song = bot.commands.get("get").run(bot, msg, args.slice(i), true);
+            if (!ytdl.validateURL(song)){
+                msg.channel.send(`The url __${song}__ is not valid !`);
+                return;
+            }
         }
 
         info = await ytdl.getBasicInfo(song);
