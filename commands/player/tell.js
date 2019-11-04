@@ -1,5 +1,7 @@
 exports.run = (bot, msg, args) =>{
-    msg.channel.send(`Currently working in ${bot.curDir}.`);
+
+    const server = bot.servers[msg.guild.id];
+    msg.channel.send(`Currently working in ${server.curDir}.`);
 
 };
 

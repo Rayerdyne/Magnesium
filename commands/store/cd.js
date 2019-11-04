@@ -1,17 +1,19 @@
 exports.run = (bot, msg, args) =>{
+    const server = bot.servers[msg.guild.id];
+    
     if (!args[0]){
         msg.channel.send("You need to provide an argument !");
         return;
     } else if (args[0] === ".."){
-        bot.curDir = "global";
-        msg.channel.send(`Current directory set to **${bot.curDir}**.`);
+        server.curDir = "global";
+        msg.channel.send(`Current directory set to **${server.curDir}**.`);
         return;
-    } else if (!bot.store.has(args[0])){
+    } else if (!server.store.has(args[0])){
         msg.channel.send(`**${args[0]}** folder does not exists.`);
         return;
     } else {
-        bot.curDir = args[0];
-        msg.channel.send(`Current directory set to **${bot.curDir}**.`);
+        server.curDir = args[0];
+        msg.channel.send(`Current directory set to **${server.curDir}**.`);
     }
 
 };

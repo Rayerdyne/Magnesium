@@ -1,19 +1,29 @@
 const {Collection} = require('discord.js');
 
 exports.run = (bot, msg, args) =>{
+      var server;
       let data = require('./../store/urls.json');
-      bot.store.deleteAll();
 
-      for (var i in data){
-            if (i === "djrole")
-                  continue;
-            bot.store.set(i, new Collection());
-            for (var j in data[i]){
-                  bot.store.get(i).set(j, data[i][j])
+      for (var guildId in data){
+            if (!bot.servers[guildId]){
+                  bot.servers[guildId] = require("./../../newServer")();
             }
-      }
+            server = bot.servers[guildId];
+            server.store.deleteAll();
+            for (var i in data[guildId]){
+                  if (i === "djrole")     continue;
 
-      bot.player.djrole = data.djrole;
+                  server.store.set(i, new Collection());
+                  for (var j in data[guildId][i]){
+                        server.store.get(i).set(j, data[guildId][i][j]);
+                  }
+            }
+            if (! server.store.has("global")){
+                  server.store.set("global", new Collection());
+            }
+            server.player.djrole = data[guildId].djrole;
+            server.prefix = data[guildId].prefix;
+      }
 
       if (! msg)    return;
       msg.channel.send("Reloaded !");

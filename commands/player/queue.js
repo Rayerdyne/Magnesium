@@ -1,7 +1,9 @@
 const Discord  = require("discord.js");
 
 exports.run = (bot, msg, args) =>{
-    if (! bot.player.current.title){
+
+    const server = bot.servers[msg.guild.id];
+    if (! server.player.current.title){
       msg.channel.send("The bot is not currently playing music !");
       return;
     }
@@ -9,14 +11,14 @@ exports.run = (bot, msg, args) =>{
     const embed = new Discord.RichEmbed()
         .setColor("#10439c")
         .setTitle("**Queue :**")
-        .setFooter(`Loop : ${(bot.player.isLooping) ? "ON" : "OFF"}`)
-        .addField("`Current`  :" + bot.player.current.title, `*Requested by ${bot.player.current.requester}*`, true);
+        .setFooter(`Loop : ${(server.player.isLooping) ? "ON" : "OFF"}`)
+        .addField("`Current`  :" + server.player.current.title, `*Requested by ${server.player.current.requester}*`, true);
 
     var i;
-    for (i = 0; i < bot.player.queue.length && i < 10; i++)
+    for (i = 0; i < server.player.queue.length && i < 10; i++)
         {
-          embed.addField(`\`${i+1}\`  : __${bot.player.queue[i].title}__`, 
-          `*Requested by ${bot.player.queue[i].requester}*`, true);
+          embed.addField(`\`${i+1}\`  : __${server.player.queue[i].title}__`, 
+          `*Requested by ${server.player.queue[i].requester}*`, true);
         }
 
     msg.channel.send(embed);

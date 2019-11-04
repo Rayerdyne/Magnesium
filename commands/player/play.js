@@ -1,31 +1,33 @@
 const ytdl = require("ytdl-core");
 
 /*Code copied from CodeLyon. I just added some stuff his code.*/
-function play (connection, msg, bot)
+function play (connection, msg, player)
 {
-    bot.player.dispatcher = connection.playStream(ytdl(bot.player.queue[0].video_url, {filter: "audioonly"}));
+    player.dispatcher = connection.playStream(ytdl(player.queue[0].video_url, {filter: "audioonly"}));
 
-    bot.player.current = bot.player.queue.shift();
-    bot.player.isPlaying = true;
+    player.current = player.queue.shift();
+    player.isPlaying = true;
 
-    bot.player.dispatcher.on("end", () => {
-        if (bot.player.isLooping){
-            bot.player.queue.push(bot.player.current);
+    player.dispatcher.on("end", () => {
+        if (player.isLooping){
+            player.queue.push(player.current);
         }
 
-        if (bot.player.queue[0]){
-            bot.player.isPlaying = true;
-            play(connection, msg, bot);
+        if (player.queue[0]){
+            player.isPlaying = true;
+            play(connection, msg, player);
         }
         else{
             connection.disconnect();
-            bot.player.isPlaying = false;
+            player.isPlaying = false;
         }
     });
     return;
 }
 
 exports.run = async (bot, msg, args, root) =>{
+
+    const server = bot.servers[msg.guild.id];
 
     if (!args[0]){
         msg.channel.send("There is no arguments !");
@@ -37,9 +39,9 @@ exports.run = async (bot, msg, args, root) =>{
         return;
     }
 
-    if (bot.player.djrole){
-        if(!root && !msg.member.roles.find(role => role.name ===  bot.player.djrole)){
-            bot.player.toValidate.push(msg);
+    if (server.player.djrole){
+        if(!root && !msg.member.roles.find(role => role.name ===  server.player.djrole)){
+            server.player.toValidate.push(msg);
             msg.channel.send("You are not allowed to ! Wait until a DJ likes your message.");
             return;
         }
@@ -64,9 +66,9 @@ exports.run = async (bot, msg, args, root) =>{
         else
             info.requester = msg.author.username;
 
-        bot.player.queue.push(info);
+        server.player.queue.push(info);
 
-        msg.channel.send(`__${bot.player.queue[bot.player.queue.length-1].title}__ added to queue.`);
+        msg.channel.send(`__${server.player.queue[server.player.queue.length-1].title}__ added to queue.`);
 
         const sep = args.splice(i+1, 1);
         if (sep[0] !== '&')
@@ -83,7 +85,7 @@ exports.run = async (bot, msg, args, root) =>{
     }
 
     if (!msg.guild.voiceConnection) msg.member.voiceChannel.join().then(connection => {
-        play (connection, msg, bot);
+        play (connection, msg, server.player);
     });
 
     return;

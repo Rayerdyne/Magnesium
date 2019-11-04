@@ -1,6 +1,8 @@
 const {Collection} = require('discord.js');
 
 exports.run = (bot, msg, args) =>{
+
+  const server = bot.servers[msg.guild.id];
     //Checks :
     if (!args[1]) {
         msg.channel.send("Not enough arguments !");
@@ -9,27 +11,27 @@ exports.run = (bot, msg, args) =>{
 
     //Create new directory :
     if (args[0] === "dir"){
-        if (bot.store.has(args[1])){
+        if (server.store.has(args[1])){
           msg.channel.send(`Directory **${args[1]}** already exists !`);
           return;
         }
-        bot.store.set(args[1], new Collection());
+        server.store.set(args[1], new Collection());
         msg.channel.send(`Directory **${args[1]}** created !`);
         return;
       }
 
     //Create new element :
-    var folder = bot.store.get(bot.curDir);
-    var folderName = bot.curDir;
+    var folder = server.store.get(server.curDir);
+    var folderName = server.curDir;
     if (args[2] === "in"){
         if (!args[3]){
             msg.channel.send("You need to provide a folder after `in` !");
             return;
-          }  else if (!bot.store.has(args[3])){
+          }  else if (!server.store.has(args[3])){
             msg.channel.send(`Directory **${args[3]}** does not exists !`);
             return;
           }
-        folder = bot.store.get(args[3]);
+        folder = server.store.get(args[3]);
         folderName = args[3];
       }
 

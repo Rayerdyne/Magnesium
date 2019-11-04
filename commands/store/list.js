@@ -1,25 +1,26 @@
 exports.run = (bot, msg, args) =>{
+  const server = bot.servers[msg.guild.id];
   var ans="";
 
     switch(args[0])
     {
         case undefined:
-          ans = "*Current directory :*\n";
-          var folder = bot.store.get(bot.curDir);
+          ans = `*Current directory :* **${server.curDir}**\n`;
+          var folder = server.store.get(server.curDir);
           folder.forEach((value, key, map) => {
             ans = ans + `> \`${key}\`\n`;
           });
           msg.channel.send(ans);
           break;
         case "dirs":
-          ans = "*Directories : *\n";
-          bot.store.forEach((value, key, map) => {
+          ans = `*Directories :* \n`;
+          server.store.forEach((value, key, map) => {
             ans = ans + `> \`${key}\`\n`;
           });
           msg.channel.send(ans);
           break;
         case "everything":
-          bot.store.forEach((valueDir, keyDir, mapDir) =>{
+          server.store.forEach((valueDir, keyDir, mapDir) =>{
               ans = ans + `**${keyDir}**\n`
               valueDir.forEach((valueElm, keyElm, mapElm) => {
                   ans = ans + `> \`${keyElm}\`\n`;
@@ -28,11 +29,11 @@ exports.run = (bot, msg, args) =>{
           msg.channel.send(ans);
           break;
         default:
-          if (!bot.store.has(args[0])){
+          if (!server.store.has(args[0])){
             msg.channel.send(`**${args[0]}** folder does not exists.`);
             return;
           }
-          folder = bot.store.get(args[0]);
+          folder = server.store.get(args[0]);
           ans = ans + `**${args[0]}**\n`;
           folder.forEach((value, key, map) => {
             ans = ans + `> \`${key}\`\n`;

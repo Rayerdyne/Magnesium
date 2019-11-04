@@ -1,19 +1,21 @@
 exports.run = (bot, msg, args) =>{
+
+  const server = bot.servers[msg.guild.id];
     if (!args[0]){
       msg.channel.send("There is no arguments !");
       return;
     }
 
-    if (bot.player.djrole){
-      if(!root && !msg.member.roles.find(role => role.name ===  bot.player.djrole)){
-          bot.player.toValidate.push(msg);
+    if (server.player.djrole){
+      if(!root && !msg.member.roles.find(role => role.name ===  server.player.djrole)){
+          server.player.toValidate.push(msg);
           msg.channel.send("You are not allowed to ! Wait until a DJ likes your message.");
           return;
       }
     }
 
     if (args[0] === "none"){
-      bot.player.djrole = undefined;
+      server.player.djrole = undefined;
       msg.channel.send("There is no DJ role.");
       return;
       }
@@ -23,7 +25,7 @@ exports.run = (bot, msg, args) =>{
         return;
     }
 
-    bot.player.djrole = args[0];
+    server.player.djrole = args[0];
     msg.channel.send(`The DJ role hes been set to **${args[0]}.**`);
 
 };

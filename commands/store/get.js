@@ -1,22 +1,23 @@
 exports.run = (bot, msg, args, fromPlay) =>{
+    const server = bot.servers[msg.guild.id];
   //Vérifications
       if (! args[0]){
             msg.channel.send("Not enough arguments !");
             return;
       }
 
-      var folderName = bot.curDir;
-      var folder = bot.store.get(folderName);
+      var folderName = server.curDir;
+      var folder = server.store.get(folderName);
       if (args[1] === "in"){
         if (!args[2]){
           msg.channel.send("You need to provide a directory name after `in`.");
           return;
-        } else if(!bot.store.has(args[2])){
+        } else if(!server.store.has(args[2])){
           msg.channel.send(`**${args[2]}** directory does not exists.`);
           return;
         }
         folderName = args[2];
-        folder = bot.store.get(folderName);
+        folder = server.store.get(folderName);
       }
 
       if (!folder.has(args[0])){

@@ -1,6 +1,7 @@
 const {RichEmbed} = require('discord.js')
 
 exports.run = (bot, msg, args) =>{
+    const server = bot.servers[msg.guild.id];
     //Vérifications...
       if (! args[0]){
             msg.channel.send("Not enough arguments !");
@@ -10,7 +11,7 @@ exports.run = (bot, msg, args) =>{
     var ans = "__Matches :__\n";
 
     var c = 0;
-    bot.store.forEach((valueDir, keyDir, mapDir) => {
+    server.store.forEach((valueDir, keyDir, mapDir) => {
           valueDir.forEach((valueElm, keyElm, mapElm) =>{
             if (keyElm.indexOf(args[0]) !== -1){
                 ans = ans + ` \`${keyElm}\` in **${keyDir}**.\n`;
@@ -29,6 +30,6 @@ exports.run = (bot, msg, args) =>{
 };
 
 exports.help = {
-  name: "s_search",
+  name: "search",
   description: "Search a key-word in the url bank, in all directories."
 };

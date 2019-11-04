@@ -1,16 +1,20 @@
 module.exports = (messageReaction, user, bot) => {
+  if (! bot.servers[msg.guild.id]){
+    bot.servers[msg.guild.id] = require("./../../newServer")();
+  }
+  const server = bot.servers[msg.guild.id];
 
     if (messageReaction.emoji.name !== '👍') return;
-    if (!bot.player.djrole) return;
+    if (!server.player.djrole) return;
 
     const member = messageReaction.message.guild.member(user);
 
-    if (! member.roles.find(role => role.name ===  bot.player.djrole)) return;
+    if (! member.roles.find(role => role.name ===  server.player.djrole)) return;
     
     /*We just make as if the reacted message was re-sent, then we require the command with root = true*/
-    if (messageReaction.message.content.indexOf(bot.PREFIX) !== 0)   return;
+    if (messageReaction.message.content.indexOf(server.prefix) !== 0)   return;
 
-    const content = messageReaction.message.content.slice(bot.PREFIX.length)
+    const content = messageReaction.message.content.slice(server.prefix.length)
     const args = content.trim().split(/ +/g);//removes blanks and split
     const cmd = args.shift().toLowerCase();
 
@@ -30,13 +34,13 @@ module.exports = (messageReaction, user, bot) => {
         }
 
     var i;
-    for (i = 0; i < bot.player.toValidate.length; i++){
-      if (bot.player.toValidate[i].content === messageReaction.message.content){
-        bot.player.toValidate.splice(i, 1);
+    for (i = 0; i < server.player.toValidate.length; i++){
+      if (server.player.toValidate[i].content === messageReaction.message.content){
+        server.player.toValidate.splice(i, 1);
         break;
       }
     }
-    if (i === bot.player.toValidate.length) return;
+    if (i === server.player.toValidate.length) return;
     //in this case, the reacted message is not from a non DJ people
 
     command.run(bot, messageReaction.message, args, true);

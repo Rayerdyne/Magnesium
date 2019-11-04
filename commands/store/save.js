@@ -1,22 +1,31 @@
 const fs = require('fs');
 
-exports.run = (bot, msg, args) =>{
-      let toWrite = {};
+exports.run = (bot, msg, args, silent) =>{
+      var toWrite = {};
+      var server;
 
-      bot.store.forEach((valueDir, keyDir, mapDir) =>{
-          toWrite[keyDir] = {};
-          valueDir.forEach((valueElm, keyElm, mapElm) => {
-              toWrite[keyDir][keyElm] = valueElm;
+      for (var guildId in bot.servers)
+          {
+          toWrite[guildId] = {};
+          bot.servers[guildId].store.forEach((valueDir, keyDir, mapDir) =>{
+              toWrite[guildId][keyDir] = {};
+              valueDir.forEach((valueElm, keyElm, mapElm) => {
+                  toWrite[guildId][keyDir][keyElm] = valueElm;
+                });
             });
-      });
+          toWrite[guildId].djrole = bot.servers[guildId].player.djrole;
+          toWrite[guildId].prefix = bot.servers[guildId].prefix;
+          }
 
-      toWrite.djrole = bot.player.djrole;
-
-      let data = JSON.stringify(toWrite);
+      let data = JSON.stringify(toWrite, null, 4);
       fs.writeFileSync('./commands/store/urls.json', data);
 
-      console.log ("Registered");
+      if (silent){
+          console.log("Silently registered.");
+          return;
+      }
 
+      console.log ("Registered");
       msg.channel.send("Saved !");
 
 };

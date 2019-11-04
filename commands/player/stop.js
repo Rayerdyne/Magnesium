@@ -1,18 +1,20 @@
 exports.run = (bot, msg, args, root) =>{
-    if (bot.player.djrole){
-        if(!root && !msg.member.roles.find(role => role.name ===  bot.player.djrole)){
-            bot.player.toValidate.push(msg);
+
+  const server = bot.servers[msg.guild.id];
+    if (server.player.djrole){
+        if(!root && !msg.member.roles.find(role => role.name ===  server.player.djrole)){
+            server.player.toValidate.push(msg);
             msg.channel.send("You are not allowed to ! Wait until a DJ likes your message.");
             return;
         }
     }
 
     if (msg.guild.me.voiceChannel){
-        for (i = bot.player.queue.length; i >= 0; i--){
-            bot.player.queue.splice(i, 1);
+        for (i = server.player.queue.length; i >= 0; i--){
+            server.player.queue.splice(i, 1);
             }
-        bot.player.current.title = undefined;
-        bot.player.dispatcher.end();
+        server.player.current.title = undefined;
+        server.player.dispatcher.end();
         msg.channel.send("Stopped.");
     }
 

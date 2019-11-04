@@ -1,4 +1,5 @@
 exports.run = (bot, msg, args) =>{
+  const server = bot.servers[msg.guild.id];
     //Vérifications
     if (! args[0]){
           msg.channel.send("There is no arguments !");
@@ -10,35 +11,35 @@ exports.run = (bot, msg, args) =>{
       if (! args[1]){
         msg.channel.send("You need to provide a directory after `dir`.");
         return;
-      }  else if(!bot.store.has(args[1])){
+      }  else if(!server.store.has(args[1])){
         msg.channel.send(`Directory **${args[2]}** does not exists.`);
         return;
-      }  else if (args[1] === bot.curDir){
+      }  else if (args[1] === server.curDir){
         msg.channel.send("You cannot remove the current directory !");
         return;
       } else if (args[1] === "global"){
         msg.channel.send("You cannot remove the global directory !");
         return;
       }
-      bot.store.get(args[1]).deleteAll();
-      bot.store.delete(args[1]);
+      server.store.get(args[1]).deleteAll();
+      server.store.delete(args[1]);
       msg.channel.send(`Directory **${args[1]}** deleted !`);
       return;
     }
 
     // remove an Element
-    var folderName = bot.curDir;
-    var folder = bot.store.get(folderName);
+    var folderName = server.curDir;
+    var folder = server.store.get(folderName);
     if (args[1] === "in"){
           if (! args[2]){
             msg.channel.send("You need to provide a directory after `in`.");
             return;
-          }  else if(!bot.store.has(args[2])){
+          }  else if(!server.store.has(args[2])){
             msg.channel.send(`Directory **${args[2]}** does not exists.`);
             return;
           }
           folderName = args[2];
-          folder = bot.store.get(folderName);
+          folder = server.store.get(folderName);
         }
 
     if (!folder.has(args[0])){
@@ -52,7 +53,7 @@ exports.run = (bot, msg, args) =>{
 };
 
 exports.help = {
-  name: "s_remove",
+  name: "rm",
   description: "Removes an element.\n \
 `remove elm` will remove `elm` in the current directory\n \
 `remove elm in myDir` will remove `elm` in the directory **myDir**\n \
