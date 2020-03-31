@@ -2,11 +2,11 @@ exports.run = (bot, msg, args, root) =>{
 
   const server = bot.servers[msg.guild.id];
   if (!msg.member.voiceChannel){
-    msg.channel.send("You are not connected to a voice channel !");
+    msg.channel.send("You are not connected to a voice channel 🙃!");
     return;
 }
 if (!msg.guild.me.voiceChannel){
-    msg.channel.send("I'm not connected to a voice channel !");
+    msg.channel.send("I'm not connected to a voice channel 🙃!");
     return;
 }
 
@@ -25,15 +25,15 @@ if (!reg.test(args[0])){
 }
 const index = parseInt(args[0]) - 1;
 if (index < 0){
-  msg.channel.send("Argument is negative !");
+  msg.channel.send("😠 Argument is negative !");
   return;
 } else if (index > server.player.queue.length){
-  msg.channel.send("Argument value exceeds queue's length !");
+  msg.channel.send("Argument value exceeds queue's length 😔!");
   return;
 }
 
 const removed = server.player.queue.splice(index, 1);
-msg.channel.send(`${removed[0].title} removed from queue !`);
+msg.channel.send(`${removed[0].title} removed from queue 😉!`);
 // console.log(server.player.queue.slice(index, 1)[0].title);
 
 };

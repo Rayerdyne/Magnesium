@@ -1,25 +1,38 @@
 const ytdl = require("ytdl-core");
-
+const opus = require("opusscript");
 /*Code copied from CodeLyon. I just added some stuff his code.*/
 function play (connection, msg, player)
 {
-    player.dispatcher = connection.playStream(ytdl(player.queue[0].video_url, {filter: "audioonly"}));
-
+    const stream = ytdl(player.queue[0].video_url, {filter: "audioonly"});
+    // console.log(player.queue[0]);
+    player.dispatcher = connection.playStream(stream);
+    
     player.current = player.queue.shift();
     player.isPlaying = true;
 
-    player.dispatcher.on("end", () => {
-        if (player.isLooping){
-            player.queue.push(player.current);
-        }
+    player.dispatcher.on("start", () => {
+        // console.log(player.current);
+        msg.channel.send(`Now playing 🎵 __${player.current.title}__ for **${player.current.requester}**.`);
+    });
 
-        if (player.queue[0]){
-            player.isPlaying = true;
-            play(connection, msg, player);
-        }
-        else{
-            connection.disconnect();
-            player.isPlaying = false;
+    player.dispatcher.on("speaking", (speaks) => {
+        if (!speaks) {
+            if (player.dispatcher.paused) {
+                return;
+            }
+            if (player.isLooping){
+                player.queue.push(player.current);
+            }
+    
+            if (player.queue[0]){
+                player.isPlaying = true;
+                play(connection, msg, player);
+            }
+            else {
+                connection.disconnect();
+                player.isPlaying = false;
+            }
+
         }
     });
     return;
@@ -30,12 +43,12 @@ exports.run = async (bot, msg, args, root) =>{
     const server = bot.servers[msg.guild.id];
 
     if (!args[0]){
-        msg.channel.send("There is no arguments !");
+        msg.channel.send("🙊 No arguments provided !");
         return;
     }
 
     if (!msg.member.voiceChannel){
-        msg.channel.send("You need to be in a voice channel !");
+        msg.channel.send("🙃 You need to be in a voice channel !");
         return;
     }
 
@@ -55,8 +68,9 @@ exports.run = async (bot, msg, args, root) =>{
 
         if (!ytdl.validateURL(song)){
             song = bot.commands.get("get").run(bot, msg, args.slice(i), true);
+
             if (!ytdl.validateURL(song)){
-                msg.channel.send(`The url __${song}__ is not valid !`);
+                msg.channel.send(`The url __${song}__ is not valid 😅!`);
                 return;
             }
         }
@@ -69,7 +83,7 @@ exports.run = async (bot, msg, args, root) =>{
 
         server.player.queue.push(info);
 
-        msg.channel.send(`__${server.player.queue[server.player.queue.length-1].title}__ added to queue.`);
+        msg.channel.send(`__${server.player.queue[server.player.queue.length-1].title}__ added to queue 🎵.`);
 
         const sep = args.splice(i+1, 1);
         if (sep[0] !== '&')

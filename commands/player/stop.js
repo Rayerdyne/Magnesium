@@ -14,8 +14,8 @@ exports.run = (bot, msg, args, root) =>{
             server.player.queue.splice(i, 1);
             }
         server.player.current.title = undefined;
-        server.player.dispatcher.end();
-        msg.channel.send("Stopped.");
+        server.player.dispatcher.destroy();
+        msg.channel.send("⏹ Stopped.");
     }
 
     if (msg.guild.connection){

@@ -31,5 +31,6 @@ exports.run = (bot, msg, args) =>{
 
 exports.help = {
   name: "search",
-  description: "Search a key-word in the url bank, in all directories."
+  description: "Search a key-word in the url bank, in all directories.\n \
+  Gne it overrides find."
 };

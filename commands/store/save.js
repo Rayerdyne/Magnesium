@@ -25,8 +25,7 @@ exports.run = (bot, msg, args, silent) =>{
           return;
       }
 
-      console.log ("Registered");
-      msg.channel.send("Saved !");
+      msg.channel.send("📘 Saved !");
 
 };
 

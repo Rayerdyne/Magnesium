@@ -1,8 +1,8 @@
-exports.run = (bot, msg, args, fromPlay) =>{
+exports.run = (bot, msg, args, fromPlay, silent) =>{
     const server = bot.servers[msg.guild.id];
   //Vérifications
       if (! args[0]){
-            msg.channel.send("Not enough arguments !");
+            msg.channel.send("🙊 Not enough arguments provided !");
             return;
       }
 
@@ -10,10 +10,10 @@ exports.run = (bot, msg, args, fromPlay) =>{
       var folder = server.store.get(folderName);
       if (args[1] === "in"){
         if (!args[2]){
-          msg.channel.send("You need to provide a directory name after `in`.");
+          msg.channel.send("🙊 You need to provide a directory name after `in`.");
           return;
         } else if(!server.store.has(args[2])){
-          msg.channel.send(`**${args[2]}** directory does not exists.`);
+          msg.channel.send(`😧 **${args[2]}** directory does not exists .`);
           return;
         }
         folderName = args[2];
@@ -21,7 +21,9 @@ exports.run = (bot, msg, args, fromPlay) =>{
       }
 
       if (!folder.has(args[0])){
-        msg.channel.send(`\`${args[0]}\` does not exists in **${folderName}**.`);
+        if (!silent) {
+            msg.channel.send(`\`${args[0]}\` does not exists in **${folderName}** 😫.`);
+        }
         return;
       }
 
@@ -29,7 +31,9 @@ exports.run = (bot, msg, args, fromPlay) =>{
         return folder.get(args[0]);
       }
       else {
-        msg.channel.send(`\`${folder.get(args[0])}\``);
+        if (!silent){
+            msg.channel.send(`\`${folder.get(args[0])}\``);
+        }
         return;
       }
 };

@@ -1,10 +1,27 @@
 {
     "614486304956219482": {
         "global": {
-            "test": "bonjour"
+            "test": "bonjour",
+            "virus": "https://www.youtube.com/watch?v=AKRqsKxWj4M"
         },
         "dossier": {
             "test": "auRevoir"
+        },
+        "prefix": "--"
+    },
+    "566878059333156874": {
+        "global": {
+            "banane": "bou",
+            "virus": "https://www.youtube.com/watch?v=AKRqsKxWj4M",
+            "rudebuster": "https://youtu.be/q1W4-O8WOmo",
+            "tetris": "https://youtu.be/uQsJaD8CrJw",
+            "yo": "https://youtu.be/Pr9JXHQ-j0c",
+            "trobien": "https://youtu.be/ELQMgQt7_ww",
+            "sweetdreams": "https://youtu.be/qeMFqkcPYcg",
+            "croco": "https://youtu.be/S9yAiKB9fmw",
+            "runfree": "https://youtu.be/3IoTV4bvIzw",
+            "getoffmyback": "https://youtu.be/pZ9aK5FYU_8",
+            "youcanttakeme": "https://youtu.be/g13zMlULFnA"
         },
         "prefix": "--"
     }

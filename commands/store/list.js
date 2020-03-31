@@ -13,7 +13,7 @@ exports.run = (bot, msg, args) =>{
           msg.channel.send(ans);
           break;
         case "dirs":
-          ans = `*Directories :* \n`;
+          ans = `📂 *Directories :* \n`;
           server.store.forEach((value, key, map) => {
             ans = ans + `> \`${key}\`\n`;
           });
@@ -30,7 +30,7 @@ exports.run = (bot, msg, args) =>{
           break;
         default:
           if (!server.store.has(args[0])){
-            msg.channel.send(`**${args[0]}** folder does not exists.`);
+            msg.channel.send(`**${args[0]}** folder does not exists 😬.`);
             return;
           }
           folder = server.store.get(args[0]);

@@ -5,18 +5,18 @@ exports.run = (bot, msg, args) =>{
   const server = bot.servers[msg.guild.id];
     //Checks :
     if (!args[1]) {
-        msg.channel.send("Not enough arguments !");
+        msg.channel.send("🙊 Not enough arguments provided !");
         return;
       }
 
     //Create new directory :
     if (args[0] === "dir"){
         if (server.store.has(args[1])){
-          msg.channel.send(`Directory **${args[1]}** already exists !`);
+          msg.channel.send(`📂 Directory **${args[1]}** already exists !`);
           return;
         }
         server.store.set(args[1], new Collection());
-        msg.channel.send(`Directory **${args[1]}** created !`);
+        msg.channel.send(`📂 Directory **${args[1]}** created !`);
         return;
       }
 
@@ -25,10 +25,10 @@ exports.run = (bot, msg, args) =>{
     var folderName = server.curDir;
     if (args[2] === "in"){
         if (!args[3]){
-            msg.channel.send("You need to provide a folder after `in` !");
+            msg.channel.send("🙊 You need to provide a folder after `in` !");
             return;
           }  else if (!server.store.has(args[3])){
-            msg.channel.send(`Directory **${args[3]}** does not exists !`);
+            msg.channel.send(`📂 Directory **${args[3]}** does not exists !`);
             return;
           }
         folder = server.store.get(args[3]);
@@ -36,13 +36,13 @@ exports.run = (bot, msg, args) =>{
       }
 
     if (folder.has(args[0])){
-          msg.channel.send(`\`${args[0]}\` already exists in **${folderName}**.`);
+          msg.channel.send(`🤨 \`${args[0]}\` already exists in **${folderName}**.`);
           return;
         }
 
     folder.set(args[0], args[1]);
 
-    msg.channel.send(`\`${args[0]}\` registered in **${folderName}** !`);
+    msg.channel.send(`📃 \`${args[0]}\` registered in **${folderName}** !`);
 };
 
 exports.help = {

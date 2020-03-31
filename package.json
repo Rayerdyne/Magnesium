@@ -1,5 +1,5 @@
 {
-  "name": "bolgrol",
+  "name": "magnesium",
   "version": "1.0.0",
   "description": "C'est mon Bot !",
   "main": "index.js",
@@ -9,10 +9,24 @@
   "author": "Rayerdyne",
   "license": "ISC",
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^11.5.1",
+    "erlpack": "github:discordapp/erlpack",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-binaries": "^4.0.0",
+    "libsodium-wrappers": "^0.7.6",
     "opusscript": "0.0.7",
     "request": "^2.88.0",
-    "ytdl-core": "^1.0.0"
-  }
+    "ytdl-core": "^1.0.9"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rayerdyne/Magnesium.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Rayerdyne/Magnesium/issues"
+  },
+  "homepage": "https://github.com/Rayerdyne/Magnesium#readme"
 }

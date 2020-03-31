@@ -18,10 +18,9 @@ exports.run = (bot, msg, args, root) =>{
         }
     }
 
-    if(server.player.isPlaying){
+    if(!server.player.dispatcher.paused){
         server.player.dispatcher.pause();
-        server.player.isPlaying = false;
-        msg.channel.send("Paused !");
+        msg.channel.send("⏸ Paused !");
     }
 
 };

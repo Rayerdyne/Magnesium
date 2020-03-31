@@ -2,7 +2,7 @@ exports.run = (bot, msg, args, root) =>{
 
     const server = bot.servers[msg.guild.id];
     if (!args[0]){
-        msg.channel.send("There is no arguments !");
+        msg.channel.send("🙊 There is no arguments !");
         return;
     }
 

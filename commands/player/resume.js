@@ -2,11 +2,11 @@ exports.run = (bot, msg, args, root) =>{
 
   const server = bot.servers[msg.guild.id];
     if (!msg.member.voiceChannel){
-        msg.channel.send("You are not connected to a voice channel !");
+        msg.channel.send("🙊 You are not connected to a voice channel !");
         return;
     }
     if (!msg.guild.me.voiceChannel){
-        msg.channel.send("I'm not connected to a voice channel !");
+        msg.channel.send("😢 I'm not connected to a voice channel !");
         return;
     }
 
@@ -18,10 +18,9 @@ exports.run = (bot, msg, args, root) =>{
         }
     }
 
-    if (!server.player.isPlaying){
+    if (server.player.dispatcher.paused){
         server.player.dispatcher.resume();
-        server.player.isPlaying = true;
-        msg.channel.send("Resumed !");
+        msg.channel.send("⏩ Resumed !");
     }
 };
 

@@ -3,8 +3,8 @@ const Discord  = require("discord.js");
 exports.run = (bot, msg, args) =>{
 
     const server = bot.servers[msg.guild.id];
-    if (! server.player.current.title){
-      msg.channel.send("The bot is not currently playing music !");
+    if (! server.player.isPlaying){
+      msg.channel.send("The bot is not currently playing music 😆!");
       return;
     }
 
@@ -26,5 +26,5 @@ exports.run = (bot, msg, args) =>{
 
 exports.help = {
   name: "queue",
-  description: "Sends at most the 10 fisrts elements of the queue."
+  description: "Sends at most the 10 firsts elements of the queue."
 };
